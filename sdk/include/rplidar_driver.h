@@ -34,6 +34,7 @@
 
 #pragma once
 #include "sl_lidar_driver.h"
+#include "rplidar_export.h"
 
 #ifndef __cplusplus
 #error "The RPlidar SDK requires a C++ compiler to be built"
@@ -44,13 +45,13 @@ namespace rp { namespace standalone{ namespace rplidar {
     using namespace sl;
     typedef LidarScanMode RplidarScanMode;
 
-enum {
+RPLIDAR_SYMBOL enum {
    DRIVER_TYPE_SERIALPORT = 0x0,
    DRIVER_TYPE_TCP = 0x1,
    DRIVER_TYPE_UDP = 0x2,
 };
 
-class RPlidarDriver {
+RPLIDAR_SYMBOL class RPlidarDriver {
 public:
     enum {
         DEFAULT_TIMEOUT = 2000, //2000 ms

@@ -38,6 +38,7 @@
 #include <vector>
 #include <map>
 #include <string>
+#include "rplidar_export.h"
 
 #ifndef DEPRECATED
     #ifdef __GNUC__
@@ -70,7 +71,7 @@ namespace sl {
     /**
     * Lidar scan mode
     */
-    struct LidarScanMode
+    RPLIDAR_SYMBOL struct LidarScanMode
     {
         // Mode id
         sl_u16  id;
@@ -126,7 +127,7 @@ namespace sl {
         }
     };
 
-    enum LIDARTechnologyType {
+    RPLIDAR_SYMBOL enum LIDARTechnologyType {
         LIDAR_TECHNOLOGY_UNKNOWN = 0,
         LIDAR_TECHNOLOGY_TRIANGULATION = 1,
         LIDAR_TECHNOLOGY_DTOF = 2,
@@ -134,7 +135,7 @@ namespace sl {
         LIDAR_TECHNOLOGY_FMCW = 4,
     };
 
-    enum LIDARMajorType {
+    RPLIDAR_SYMBOL enum LIDARMajorType {
         LIDAR_MAJOR_TYPE_UNKNOWN = 0,
         LIDAR_MAJOR_TYPE_A_SERIES = 1,
         LIDAR_MAJOR_TYPE_S_SERIES = 2,
@@ -143,7 +144,7 @@ namespace sl {
         LIDAR_MAJOR_TYPE_C_SERIES = 6,
     };
 
-    enum LIDARInterfaceType {
+    RPLIDAR_SYMBOL enum LIDARInterfaceType {
         LIDAR_INTERFACE_UART = 0,
         LIDAR_INTERFACE_ETHERNET = 1,
         LIDAR_INTERFACE_USB = 2,
@@ -153,7 +154,7 @@ namespace sl {
         LIDAR_INTERFACE_UNKNOWN = 0xFFFF,
     };
 
-    struct SlamtecLidarTimingDesc {
+    RPLIDAR_SYMBOL struct SlamtecLidarTimingDesc {
 
         sl_u32  sample_duration_uS;
         sl_u32  native_baudrate;
@@ -168,7 +169,7 @@ namespace sl {
     /**
     * Abstract interface of communication channel
     */
-    class IChannel
+    RPLIDAR_SYMBOL class IChannel
     {
     public:
         virtual ~IChannel() {}
@@ -240,7 +241,7 @@ namespace sl {
     /**
     * Abstract interface of serial port channel
     */
-    class ISerialPortChannel : public IChannel
+    RPLIDAR_SYMBOL class ISerialPortChannel : public IChannel
     {
     public:
         virtual ~ISerialPortChannel() {}
@@ -257,30 +258,30 @@ namespace sl {
     * \param baudrate Baudrate
     *                   Please refer to the datasheet for the baudrate (maybe 115200 or 256000)
     */
-    Result<IChannel*> createSerialPortChannel(const std::string& device, int baudrate);
+    RPLIDAR_SYMBOL Result<IChannel*> createSerialPortChannel(const std::string& device, int baudrate);
 
     /**
     * Create a TCP channel
     * \param ip IP address of the device
     * \param port TCP port
     */
-    Result<IChannel*> createTcpChannel(const std::string& ip, int port);
+    RPLIDAR_SYMBOL Result<IChannel*> createTcpChannel(const std::string& ip, int port);
 
     /**
     * Create a UDP channel
     * \param ip IP address of the device
     * \param port UDP port
     */
-    Result<IChannel*> createUdpChannel(const std::string& ip, int port);
+    RPLIDAR_SYMBOL Result<IChannel*> createUdpChannel(const std::string& ip, int port);
 
-    enum MotorCtrlSupport
+    RPLIDAR_SYMBOL enum MotorCtrlSupport
     {
         MotorCtrlSupportNone = 0,
         MotorCtrlSupportPwm = 1,
         MotorCtrlSupportRpm = 2,
     };
 
-    enum ChannelType{
+    RPLIDAR_SYMBOL enum ChannelType{
         CHANNEL_TYPE_SERIALPORT = 0x0,
         CHANNEL_TYPE_TCP = 0x1,
         CHANNEL_TYPE_UDP = 0x2,
@@ -289,7 +290,7 @@ namespace sl {
         /**
     * Lidar motor info
     */
-    struct LidarMotorInfo
+    RPLIDAR_SYMBOL struct LidarMotorInfo
     {
         MotorCtrlSupport motorCtrlSupport;
 
@@ -303,7 +304,7 @@ namespace sl {
         sl_u16 min_speed;
     };
 
-    class ILidarDriver
+    RPLIDAR_SYMBOL class ILidarDriver
     {
     public:
         virtual ~ILidarDriver() {}
@@ -565,5 +566,5 @@ namespace sl {
     * delete *lidar;
     * delete *channel;
     */
-    Result<ILidarDriver*> createLidarDriver();
+    RPLIDAR_SYMBOL Result<ILidarDriver*> createLidarDriver();
 }

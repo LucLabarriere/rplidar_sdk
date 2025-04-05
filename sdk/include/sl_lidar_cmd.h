@@ -90,47 +90,49 @@
 #define SL_LIDAR_ULTRAEXPRESS_SCAN_FLAG_STD                 0x0001 
 #define SL_LIDAR_ULTRAEXPRESS_SCAN_FLAG_HIGH_SENSITIVITY    0x0002
 
-typedef struct _sl_lidar_payload_express_scan_t
+#include "rplidar_export.h"
+
+RPLIDAR_SYMBOL typedef struct _sl_lidar_payload_express_scan_t
 {
     sl_u8   working_mode;
     sl_u16  working_flags;
     sl_u16  param;
 } __attribute__((packed)) sl_lidar_payload_express_scan_t;
 
-typedef struct _sl_lidar_payload_hq_scan_t
+RPLIDAR_SYMBOL typedef struct _sl_lidar_payload_hq_scan_t
 {
     sl_u8  flag;
     sl_u8   reserved[32];
 } __attribute__((packed)) sl_lidar_payload_hq_scan_t;
 
-typedef struct _sl_lidar_payload_get_scan_conf_t
+RPLIDAR_SYMBOL typedef struct _sl_lidar_payload_get_scan_conf_t
 {
     sl_u32  type;
 } __attribute__((packed)) sl_lidar_payload_get_scan_conf_t;
 
-typedef struct _sl_payload_set_scan_conf_t {
+RPLIDAR_SYMBOL typedef struct _sl_payload_set_scan_conf_t {
     sl_u32  type;
 } __attribute__((packed)) sl_lidar_payload_set_scan_conf_t;
 
 
 #define DEFAULT_MOTOR_SPEED         (0xFFFFu)
 
-typedef struct _sl_lidar_payload_motor_pwm_t
+RPLIDAR_SYMBOL typedef struct _sl_lidar_payload_motor_pwm_t
 {
     sl_u16 pwm_value;
 } __attribute__((packed)) sl_lidar_payload_motor_pwm_t;
 
-typedef struct _sl_lidar_payload_acc_board_flag_t
+RPLIDAR_SYMBOL typedef struct _sl_lidar_payload_acc_board_flag_t
 {
     sl_u32 reserved;
 } __attribute__((packed)) sl_lidar_payload_acc_board_flag_t;
 
-typedef struct _sl_lidar_payload_hq_spd_ctrl_t {
+RPLIDAR_SYMBOL typedef struct _sl_lidar_payload_hq_spd_ctrl_t {
     sl_u16  rpm;
 } __attribute__((packed))sl_lidar_payload_hq_spd_ctrl_t;
 
 
-typedef struct _sl_lidar_payload_new_bps_confirmation_t {
+RPLIDAR_SYMBOL typedef struct _sl_lidar_payload_new_bps_confirmation_t {
     sl_u16   flag; // reserved, must be 0x5F5F
     sl_u32  required_bps;
     sl_u16  param;
@@ -162,7 +164,7 @@ typedef struct _sl_lidar_payload_new_bps_confirmation_t {
 #define SL_LIDAR_ANS_TYPE_ACC_BOARD_FLAG   0xFF
 
 #define SL_LIDAR_RESP_ACC_BOARD_FLAG_MOTOR_CTRL_SUPPORT_MASK      (0x1)
-typedef struct _sl_lidar_response_acc_board_flag_t
+RPLIDAR_SYMBOL typedef struct _sl_lidar_response_acc_board_flag_t
 {
     sl_u32 support_flag;
 } __attribute__((packed)) sl_lidar_response_acc_board_flag_t;
@@ -180,13 +182,13 @@ typedef struct _sl_lidar_response_acc_board_flag_t
 #define SL_LIDAR_RESP_MEASUREMENT_CHECKBIT       (0x1<<0)
 #define SL_LIDAR_RESP_MEASUREMENT_ANGLE_SHIFT    1
 
-typedef struct _sl_lidar_response_sample_rate_t
+RPLIDAR_SYMBOL typedef struct _sl_lidar_response_sample_rate_t
 {
     sl_u16  std_sample_duration_us;
     sl_u16  express_sample_duration_us;
 } __attribute__((packed)) sl_lidar_response_sample_rate_t;
 
-typedef struct _sl_lidar_response_measurement_node_t
+RPLIDAR_SYMBOL typedef struct _sl_lidar_response_measurement_node_t
 {
     sl_u8    sync_quality;      // syncbit:1;syncbit_inverse:1;quality:6;
     sl_u16   angle_q6_checkbit; // check_bit:1;angle_q6:15;
@@ -197,7 +199,7 @@ typedef struct _sl_lidar_response_measurement_node_t
 #define SL_LIDAR_RESP_MEASUREMENT_EXP_ANGLE_MASK           (0x3)
 #define SL_LIDAR_RESP_MEASUREMENT_EXP_DISTANCE_MASK        (0xFC)
 
-typedef struct _sl_lidar_response_cabin_nodes_t
+RPLIDAR_SYMBOL typedef struct _sl_lidar_response_cabin_nodes_t
 {
     sl_u16   distance_angle_1; // see [distance_sync flags]
     sl_u16   distance_angle_2; // see [distance_sync flags]
@@ -212,7 +214,7 @@ typedef struct _sl_lidar_response_cabin_nodes_t
 
 #define SL_LIDAR_RESP_MEASUREMENT_EXP_SYNCBIT              (0x1<<15)
 
-typedef struct _sl_lidar_response_capsule_measurement_nodes_t
+RPLIDAR_SYMBOL typedef struct _sl_lidar_response_capsule_measurement_nodes_t
 {
     sl_u8                             s_checksum_1; // see [s_checksum_1]
     sl_u8                             s_checksum_2; // see [s_checksum_1]
@@ -220,12 +222,12 @@ typedef struct _sl_lidar_response_capsule_measurement_nodes_t
     sl_lidar_response_cabin_nodes_t  cabins[16];
 } __attribute__((packed)) sl_lidar_response_capsule_measurement_nodes_t;
 
-typedef struct _sl_lidar_response_dense_cabin_nodes_t
+RPLIDAR_SYMBOL typedef struct _sl_lidar_response_dense_cabin_nodes_t
 {
     sl_u16   distance;
 } __attribute__((packed)) sl_lidar_response_dense_cabin_nodes_t;
 
-typedef struct _sl_lidar_response_dense_capsule_measurement_nodes_t
+RPLIDAR_SYMBOL typedef struct _sl_lidar_response_dense_capsule_measurement_nodes_t
 {
     sl_u8                             s_checksum_1; // see [s_checksum_1]
     sl_u8                             s_checksum_2; // see [s_checksum_1]
@@ -234,12 +236,12 @@ typedef struct _sl_lidar_response_dense_capsule_measurement_nodes_t
 } __attribute__((packed)) sl_lidar_response_dense_capsule_measurement_nodes_t;
 
 
-typedef struct _sl_lidar_response_ultra_dense_cabin_nodes_t {
+RPLIDAR_SYMBOL typedef struct _sl_lidar_response_ultra_dense_cabin_nodes_t {
     sl_u16  qualityl_distance_scale[2];
     sl_u8   qualityh_array;
 } __attribute__((packed)) sl_lidar_response_ultra_dense_cabin_nodes_t;
 
-typedef struct _sl_lidar_response_ultra_dense_capsule_measurement_nodes_t {
+RPLIDAR_SYMBOL typedef struct _sl_lidar_response_ultra_dense_capsule_measurement_nodes_t {
     sl_u8                             s_checksum_1; // see [s_checksum_1]
     sl_u8                             s_checksum_2; // see [s_checksum_1]
     sl_u32                            time_stamp;
@@ -254,14 +256,14 @@ typedef struct _sl_lidar_response_ultra_dense_capsule_measurement_nodes_t {
 #define SL_LIDAR_RESP_MEASUREMENT_EXP_ULTRA_MAJOR_BITS     12
 #define SL_LIDAR_RESP_MEASUREMENT_EXP_ULTRA_PREDICT_BITS   10
 
-typedef struct _sl_lidar_response_ultra_cabin_nodes_t
+RPLIDAR_SYMBOL typedef struct _sl_lidar_response_ultra_cabin_nodes_t
 {
     // 31                                              0
     // | predict2 10bit | predict1 10bit | major 12bit |
     sl_u32 combined_x3;
 } __attribute__((packed)) sl_lidar_response_ultra_cabin_nodes_t;
 
-typedef struct _sl_lidar_response_ultra_capsule_measurement_nodes_t
+RPLIDAR_SYMBOL typedef struct _sl_lidar_response_ultra_capsule_measurement_nodes_t
 {
     sl_u8                             s_checksum_1; // see [s_checksum_1]
     sl_u8                             s_checksum_2; // see [s_checksum_1]
@@ -269,7 +271,7 @@ typedef struct _sl_lidar_response_ultra_capsule_measurement_nodes_t
     sl_lidar_response_ultra_cabin_nodes_t  ultra_cabins[32];
 } __attribute__((packed)) sl_lidar_response_ultra_capsule_measurement_nodes_t;
 
-typedef struct sl_lidar_response_measurement_node_hq_t
+RPLIDAR_SYMBOL typedef struct sl_lidar_response_measurement_node_hq_t
 {
     sl_u16   angle_z_q14;
     sl_u32   dist_mm_q2;
@@ -277,7 +279,7 @@ typedef struct sl_lidar_response_measurement_node_hq_t
     sl_u8    flag;
 } __attribute__((packed)) sl_lidar_response_measurement_node_hq_t;
 
-typedef struct _sl_lidar_response_hq_capsule_measurement_nodes_t
+RPLIDAR_SYMBOL typedef struct _sl_lidar_response_hq_capsule_measurement_nodes_t
 {
     sl_u8 sync_byte;
     sl_u64 time_stamp;
@@ -318,20 +320,20 @@ typedef struct _sl_lidar_response_hq_capsule_measurement_nodes_t
 #define SL_LIDAR_EXPRESS_SCAN_STABILITY_BITMAP                 4
 #define SL_LIDAR_EXPRESS_SCAN_SENSITIVITY_BITMAP               5
 
-typedef struct _sl_lidar_response_get_lidar_conf
+RPLIDAR_SYMBOL typedef struct _sl_lidar_response_get_lidar_conf
 {
     sl_u32 type;
     sl_u8  payload[0];
 }__attribute__((packed)) sl_lidar_response_get_lidar_conf_t;
 
-typedef struct _sl_lidar_response_set_lidar_conf
+RPLIDAR_SYMBOL typedef struct _sl_lidar_response_set_lidar_conf
 {
     sl_u32 type;
     sl_u32 result;
 }__attribute__((packed)) sl_lidar_response_set_lidar_conf_t;
 
 
-typedef struct _sl_lidar_response_device_info_t
+RPLIDAR_SYMBOL typedef struct _sl_lidar_response_device_info_t
 {
     sl_u8   model;
     sl_u16  firmware_version;
@@ -339,23 +341,23 @@ typedef struct _sl_lidar_response_device_info_t
     sl_u8   serialnum[16];
 } __attribute__((packed)) sl_lidar_response_device_info_t;
 
-typedef struct _sl_lidar_response_device_health_t
+RPLIDAR_SYMBOL typedef struct _sl_lidar_response_device_health_t
 {
     sl_u8   status;
     sl_u16  error_code;
 } __attribute__((packed)) sl_lidar_response_device_health_t;
 
-typedef struct _sl_lidar_ip_conf_t {
+RPLIDAR_SYMBOL typedef struct _sl_lidar_ip_conf_t {
     sl_u8 ip_addr[4];
     sl_u8 net_mask[4];
     sl_u8 gw[4];
 }__attribute__((packed)) sl_lidar_ip_conf_t;
 
-typedef struct _sl_lidar_response_device_macaddr_info_t {
+RPLIDAR_SYMBOL typedef struct _sl_lidar_response_device_macaddr_info_t {
     sl_u8   macaddr[6];
 } __attribute__((packed)) sl_lidar_response_device_macaddr_info_t;
 
-typedef struct  _sl_lidar_response_desired_rot_speed_t{
+RPLIDAR_SYMBOL typedef struct  _sl_lidar_response_desired_rot_speed_t{
     sl_u16 rpm;
     sl_u16 pwm_ref;
 }__attribute__((packed)) sl_lidar_response_desired_rot_speed_t;
