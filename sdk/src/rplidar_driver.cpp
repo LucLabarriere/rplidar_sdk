@@ -197,3 +197,102 @@ namespace rp { namespace standalone{ namespace rplidar {
     }
 
 }}}
+
+using namespace rp::standalone::rplidar;
+
+void rpl_CreateDriver(_u32 drivertype) {
+    rpl_DriverInstance = RPlidarDriver::CreateDriver(drivertype);
+}
+
+
+void rpl_DisposeDriver() {
+    RPlidarDriver::DisposeDriver(rpl_DriverInstance);
+}
+
+u_result rpl_Connect(const char* path, _u32 portOrBaud, _u32 flag) {
+    return rpl_DriverInstance->connect(path, portOrBaud, flag);
+}
+
+void rpl_Disconnect() {
+    rpl_DriverInstance->disconnect();
+}
+
+bool rpl_IsConnected() {
+    return rpl_DriverInstance->isConnected();
+}
+
+u_result rpl_Reset(_u32 timeout) {
+    return rpl_DriverInstance->reset(timeout);
+}
+
+u_result rpl_GetAllSupportedScanModes(std::vector<rp::standalone::rplidar::RplidarScanMode>& outModes, _u32 timeoutInMs) {
+    return rpl_DriverInstance->getAllSupportedScanModes(outModes, timeoutInMs);
+}
+
+u_result rpl_GetTypicalScanMode(_u16& outMode, _u32 timeoutInMs) {
+    return rpl_DriverInstance->getTypicalScanMode(outMode, timeoutInMs);
+}
+
+u_result rpl_StartScan(bool force, bool useTypicalScan, _u32 options, rp::standalone::rplidar::RplidarScanMode* outUsedScanMode) {
+    return rpl_DriverInstance->startScan(force, useTypicalScan, options, outUsedScanMode);
+}
+
+u_result rpl_StartScanExpress(bool force, _u16 scanMode, _u32 options, rp::standalone::rplidar::RplidarScanMode* outUsedScanMode, _u32 timeout) {
+    return rpl_DriverInstance->startScanExpress(force, scanMode, options, outUsedScanMode, timeout);
+}
+
+u_result rpl_GetHealth(rplidar_response_device_health_t& health, _u32 timeout) {
+    return rpl_DriverInstance->getHealth(health, timeout);
+}
+
+u_result rpl_GetDeviceInfo(rplidar_response_device_info_t& info, _u32 timeout) {
+    return rpl_DriverInstance->getDeviceInfo(info, timeout);
+}
+
+u_result rpl_SetMotorPWM(_u16 pwm) {
+    return rpl_DriverInstance->setMotorPWM(pwm);
+}
+
+u_result rpl_StartMotor() {
+    return rpl_DriverInstance->startMotor();
+}
+
+u_result rpl_StopMotor() {
+    return rpl_DriverInstance->stopMotor();
+}
+
+u_result rpl_CheckMotorCtrlSupport(bool& support, _u32 timeout) {
+    return rpl_DriverInstance->checkMotorCtrlSupport(support, timeout);
+}
+
+u_result  rpl_SetLidarIpConf(const rplidar_ip_conf_t& conf, _u32 timeout) {
+    return rpl_DriverInstance->setLidarIpConf(conf, timeout);
+}
+
+u_result  rpl_GetLidarIpConf(rplidar_ip_conf_t& conf, _u32 timeout) {
+    return rpl_DriverInstance->getLidarIpConf(conf, timeout);
+}
+
+u_result rpl_GetDeviceMacAddr(_u8* macAddrArray, _u32 timeoutInMs) {
+    return rpl_DriverInstance->getDeviceMacAddr(macAddrArray, timeoutInMs);
+}
+
+u_result rpl_Stop(_u32 timeout) {
+    return rpl_DriverInstance->stop(timeout);
+}
+
+u_result rpl_GrabScanDataHq(rplidar_response_measurement_node_hq_t* nodebuffer, size_t& count, _u32 timeout) {
+    return rpl_DriverInstance->grabScanDataHq(nodebuffer, count, timeout);
+}
+
+u_result rpl_AscendScanData(rplidar_response_measurement_node_hq_t* nodebuffer, size_t count) {
+    return rpl_DriverInstance->ascendScanData(nodebuffer, count);
+}
+
+u_result rpl_GetScanDataWithInterval(rplidar_response_measurement_node_t* nodebuffer, size_t& count) {
+    return rpl_DriverInstance->getScanDataWithInterval(nodebuffer, count);
+}
+
+u_result rpl_GetScanDataWithIntervalHq(rplidar_response_measurement_node_hq_t* nodebuffer, size_t& count) {
+    return rpl_DriverInstance->getScanDataWithIntervalHq(nodebuffer, count);
+}

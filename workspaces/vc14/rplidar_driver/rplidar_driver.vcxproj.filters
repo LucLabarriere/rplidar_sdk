@@ -129,6 +129,9 @@
     <ClInclude Include="..\..\..\sdk\src\dataunpacker\unpacker\handler_normalnode.h">
       <Filter>sdk\src\dataunpacker\unpacker</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\sdk\include\rplidar_export.h">
+      <Filter>sdk\include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\sdk\src\arch\win32\net_serial.cpp">
